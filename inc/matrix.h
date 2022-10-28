@@ -11,7 +11,10 @@ typedef struct Matrix {
     DATA_TYPE *data;
 } Matrix;
 
-Matrix* Matrix_create(INT row, INT column, INT elenum, DATA_TYPE *data);
+Matrix* Matrix_create(INT row, INT column, INT elenum, DATA_TYPE* data);
 
+VOID Matrix_print(const Matrix* mat);
+
+Matrix* Matrix_copy(const Matrix* mat_src);
 
 #endif

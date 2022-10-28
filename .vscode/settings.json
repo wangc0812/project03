@@ -29,6 +29,7 @@
     "**/.vscode/**"
   ],
   "files.associations": {
-    "matrix.h": "c"
+    "matrix.h": "c",
+    "define.h": "c"
   }
 }
