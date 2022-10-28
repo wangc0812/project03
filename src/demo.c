@@ -19,19 +19,28 @@ int main()
 
     // copy matrix
     Matrix* mat2 = copyMatrix(mat1);
-    printMatrix(mat2);  // to confirm the copy function
+    // printMatrix(mat2);  // to confirm the copy function
     
     Matrix* mat3 = addMatrix(mat1, mat2); // matrix add
-    printMatrix(mat3);  // to confirm the add function
+    // printMatrix(mat3);  // to confirm the add function
     Matrix* mat4 = subtractMatrix(mat3, mat2); // matrix sub
-    printMatrix(mat4);  // to confirm the sub function
+    // printMatrix(mat4);  // to confirm the sub function
 
+    // matrix add scalar
+    DATA_TYPE b = 6.6;
+    Matrix* mat5 = addscalar(mat1, b);
+    printMatrix(mat5);  // to confirm the add scalar function
 
-    
+    Matrix* mat6 = subscalar(mat5, b);
+    printMatrix(mat6);  // to confirm the add scalar function
+
     // free memory
     deleteMatrix(mat1);
     deleteMatrix(mat2);
     deleteMatrix(mat3);
-
+    deleteMatrix(mat4);
+    deleteMatrix(mat5);
+    deleteMatrix(mat6);
+    
     return 0;
 }

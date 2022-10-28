@@ -189,3 +189,37 @@ Matrix* subtractMatrix(const Matrix* A, const Matrix* B)
 
     return mat_sub;
 }
+
+Matrix* addscalar(const Matrix* A, const DATA_TYPE b)
+{
+    if (A == NULL)
+    {
+        ERROR_INPUT_POINTER;
+        return NULL;
+    }
+
+    Matrix* C = copyMatrix(A);
+    
+    INT  i;
+    for (i = 0; i < (A->column * A->row); i++)
+    {
+        C->data[i] = C->data[i] + b;
+    }
+
+    return C;
+
+}
+
+Matrix* subscalar(const Matrix* A, const DATA_TYPE b)
+{
+    if (A == NULL)
+    {
+        ERROR_INPUT_POINTER;
+        return NULL;
+    }
+
+    Matrix* C = addscalar(A, -1 * b);
+
+    return C;
+
+}
