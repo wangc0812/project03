@@ -1,2 +1,4 @@
 ### SUSTech ###
-C/C++ Course 
+C/C++ Program Design
+cs205
+project
