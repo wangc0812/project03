@@ -9,7 +9,7 @@ INCLUDE = -I./inc # -I means search files in the specificed folder
 
 CC = gcc
 CFLAGES = -g -c -Wall
-CFLAG = -g
+CFLAG = -g # gdb debuger
 
 # options pass to the compiler
 # -c generates the object file
