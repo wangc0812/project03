@@ -265,3 +265,21 @@ DATA_TYPE minelem(const Matrix* A)
 
     return min;
 }
+
+Matrix* mulMatrix(const Matrix* A, const Matrix* B)
+{
+    if (A == NULL || B == NULL)
+    {
+        ERROR_INPUT_POINTER;
+        return NULL;
+    }
+
+    if (A->row != B->column)
+    {
+        ERROR_SIZE_MATCH;
+        return NULL;
+    }
+
+    
+
+}

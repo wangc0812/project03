@@ -35,4 +35,6 @@ DATA_TYPE maxelem(const Matrix* A);
 
 DATA_TYPE minelem(const Matrix* A);
 
+Matrix* mulMatrix(const Matrix* A, const Matrix* B);
+
 #endif
