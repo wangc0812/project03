@@ -11,10 +11,20 @@ typedef struct Matrix {
     DATA_TYPE *data;
 } Matrix;
 
-Matrix* Matrix_create(INT row, INT column, INT elenum, DATA_TYPE* data);
+Matrix* createMatrix(INT row, INT column, INT elenum, DATA_TYPE* data);
 
-VOID Matrix_print(const Matrix* mat);
+VOID deleteMatrix(Matrix* mat);
 
-Matrix* Matrix_copy(const Matrix* mat_src);
+VOID printMatrix(const Matrix* mat);
+
+Matrix* copyMatrix(const Matrix* mat_src);
+
+VOID array_sum(const DATA_TYPE* a, const DATA_TYPE* b, DATA_TYPE* sum, INT length);
+
+VOID array_sub(const DATA_TYPE* a, const DATA_TYPE* b, DATA_TYPE* sub, INT length);
+
+Matrix* addMatrix(const Matrix* A, const Matrix* B);
+
+Matrix* subtractMatrix(const Matrix* A, const Matrix* B);
 
 #endif

@@ -1,22 +1,20 @@
 #include "matrix.h"
 #include "define.h"
 
-Matrix* Matrix_create(INT row, INT column, INT elenum, DATA_TYPE* data) 
+Matrix* createMatrix(INT row, INT column, INT elenum, DATA_TYPE* data) 
 {
     //Generate Matrix Struct 
     //Please remember to free the memory due to dynamic allocate
     
     if (row <= 0 || column <= 0)
     {
-        printf("ERROR:input paramter error \n");
-        
+        ERROR_INPUT_INPUTPARA;
         return NULL;
     }
 
     if (data == NULL)
     {
-        printf("ERROR: input data pointer error \n");
-        
+        ERROR_INPUT_POINTER;
         return NULL;
     }
     
@@ -38,7 +36,7 @@ Matrix* Matrix_create(INT row, INT column, INT elenum, DATA_TYPE* data)
             free(mat->data);
             mat->data = NULL;
 
-            printf("ERROR:failed to allocate memeory \n");
+            ERROR_MEM_ALLOCATE;
             
             return NULL;
         }
@@ -61,13 +59,24 @@ Matrix* Matrix_create(INT row, INT column, INT elenum, DATA_TYPE* data)
     
 }
 
-VOID Matrix_print(const Matrix* mat) 
+VOID deleteMatrix(Matrix* mat)
+{
+    if (mat == NULL)
+    {
+        ERROR_INPUT_POINTER;
+        return;
+    }
+    
+    FREE(mat);
+}
+
+VOID printMatrix(const Matrix* mat) 
 {
     //Print Matrix
 
     if (mat == NULL)
     {
-        printf("ERROR: input data pointer error \n");
+        ERROR_INPUT_POINTER;
         return;
     }
 
@@ -84,17 +93,99 @@ VOID Matrix_print(const Matrix* mat)
     return;
 }
 
-Matrix* Matrix_copy(const Matrix* mat_src) 
+Matrix* copyMatrix(const Matrix* mat_src) 
 {
     //Copy Matrix
-     if (mat_src == NULL)
+    if (mat_src == NULL)
     {
-        printf("ERROR: input data pointer error \n");
-        return NULL;
+       ERROR_INPUT_POINTER;
+       return NULL;
     }
 
     INT elenum = mat_src->row * mat_src->column;
-    Matrix* mat_copy = Matrix_create(mat_src->row, mat_src->column, elenum, mat_src->data);
+    Matrix* mat_copy = createMatrix(mat_src->row, mat_src->column, elenum, mat_src->data);
     
     return mat_copy;
+}
+
+VOID array_sum(const DATA_TYPE* a, const DATA_TYPE* b, DATA_TYPE* sum, INT length)
+{
+    if (a == NULL || b == NULL || sum == NULL)
+    {
+        ERROR_INPUT_POINTER;
+        return;
+    }
+
+    INT  i;
+    for (i = 0; i < length; i++)
+    {
+        sum[i] = a[i] + b[i];
+    }
+
+    return;
+}
+
+VOID array_sub(const DATA_TYPE* a, const DATA_TYPE* b, DATA_TYPE* sub, INT length)
+{
+    if (a == NULL || b == NULL || sub == NULL)
+    {
+        ERROR_INPUT_POINTER;
+        return;
+    }
+
+    INT  i;
+    for (i = 0; i < length; i++)
+    {
+        sub[i] = a[i] - b[i];
+    }
+
+    return;
+}
+
+Matrix* addMatrix(const Matrix* A, const Matrix* B)
+{
+    if (A == NULL || B == NULL)
+    {
+        ERROR_INPUT_POINTER;
+        return NULL;
+    }
+
+    if (A->column != B->column || A->row != B->row)
+    {
+        ERROR_SIZE_MATCH;
+        return NULL;
+    }
+
+    INT elenum = A->row * A->column;
+
+    DATA_TYPE sum[elenum];
+    array_sum(A->data, B->data, sum, elenum);
+
+    Matrix* mat_sum =  createMatrix(A->row, A->column, elenum, sum);
+
+    return mat_sum;  
+}
+
+Matrix* subtractMatrix(const Matrix* A, const Matrix* B)
+{
+    if (A == NULL || B == NULL)
+    {
+        ERROR_INPUT_POINTER;
+        return NULL;
+    }
+
+    if (A->column != B->column || A->row != B->row)
+    {
+        ERROR_SIZE_MATCH;
+        return NULL;
+    }
+
+    INT elenum = A->row * A->column;
+
+    DATA_TYPE sub[elenum];
+    array_sub(A->data, B->data, sub, elenum);
+
+    Matrix* mat_sub = createMatrix(A->row, A->column, elenum, sub);
+
+    return mat_sub;
 }
