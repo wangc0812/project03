@@ -33,4 +33,6 @@ Matrix* subscalar(const Matrix* A, const DATA_TYPE b);
 
 DATA_TYPE maxelem(const Matrix* A);
 
+DATA_TYPE minelem(const Matrix* A);
+
 #endif

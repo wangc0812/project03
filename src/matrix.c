@@ -223,3 +223,45 @@ Matrix* subscalar(const Matrix* A, const DATA_TYPE b)
     return C;
 
 }
+
+DATA_TYPE maxelem(const Matrix* A)
+{
+    if (A == NULL)
+    {
+        ERROR_INPUT_POINTER;
+        return -1;
+    }
+
+    DATA_TYPE max = A->data[0];
+    INT i;
+    for ( i = 0; i < (A->column * A->row); i++)
+	{
+		if (max < A->data[i])
+		{
+			max = A->data[i];
+		}
+	}
+
+    return max;
+}
+
+DATA_TYPE minelem(const Matrix* A)
+{
+    if (A == NULL)
+    {
+        ERROR_INPUT_POINTER;
+        return -1;
+    }
+
+    DATA_TYPE min = A->data[0];
+    INT i;
+    for ( i = 0; i < (A->column * A->row); i++)
+	{
+		if (min > A->data[i])
+		{
+			min = A->data[i];
+		}
+	}
+
+    return min;
+}

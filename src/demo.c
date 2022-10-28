@@ -34,6 +34,11 @@ int main()
     Matrix* mat6 = subscalar(mat5, b);
     printMatrix(mat6);  // to confirm the add scalar function
 
+    DATA_TYPE  max = maxelem(mat1);
+    DATA_TYPE  min = minelem(mat1);
+
+    printf("max value = %f, min value = %f\n", max , min );
+
     // free memory
     deleteMatrix(mat1);
     deleteMatrix(mat2);
