@@ -39,6 +39,10 @@ int main()
 
     printf("max value = %f, min value = %f\n", max , min );
 
+    Matrix* C = mulMatrix(mat1, mat2);
+    printMatrix(C);
+
+
     // free memory
     deleteMatrix(mat1);
     deleteMatrix(mat2);
@@ -46,6 +50,7 @@ int main()
     deleteMatrix(mat4);
     deleteMatrix(mat5);
     deleteMatrix(mat6);
+    deleteMatrix(C);
     
     return 0;
 }

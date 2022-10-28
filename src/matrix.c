@@ -280,6 +280,21 @@ Matrix* mulMatrix(const Matrix* A, const Matrix* B)
         return NULL;
     }
 
+    INT i, j, size;
+    size = A->row * B->column;
+    DATA_TYPE c_data[size];
     
+    for(j = 0; j < A->row; j++)
+    {
+        for(i = 0; i < A->column; i++)
+        {
+            
+            c_data[j * A->row + i] += A->data[j * A->row + i] * B->data[i * A->row + j];
+            
+        }
+    }
+    Matrix* C = createMatrix( A->row, B->column, size, c_data);
+
+    return C;
 
 }
