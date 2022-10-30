@@ -16,8 +16,6 @@ typedef void VOID;
                free(p);       \
                p = NULL;     \
          }
-
-
 #define ERROR_INPUT_POINTER printf("ERROR: input data pointer error \n")
 #define ERROR_INPUT_INPUTPARA printf("ERROR:input paramter error \n")
 #define ERROR_MEM_ALLOCATE printf("ERROR:failed to allocate memeory \n")

@@ -27,9 +27,11 @@ Matrix* addMatrix(const Matrix* A, const Matrix* B);
 
 Matrix* subtractMatrix(const Matrix* A, const Matrix* B);
 
-Matrix* addscalar(const Matrix* A, const DATA_TYPE b);
+Matrix* addScalar(const Matrix* A, const DATA_TYPE b);
 
-Matrix* subscalar(const Matrix* A, const DATA_TYPE b);
+Matrix* subScalar(const Matrix* A, const DATA_TYPE b);
+
+Matrix* multiplyScalar(const Matrix* A, const DATA_TYPE b);
 
 DATA_TYPE maxelem(const Matrix* A);
 

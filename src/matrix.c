@@ -17,17 +17,13 @@ Matrix* createMatrix(INT row, INT column, INT elenum, DATA_TYPE* data)
         ERROR_INPUT_POINTER;
         return NULL;
     }
-    
-    
     INT mat_size = row * column;
-
     if (mat_size == elenum)
     {
         Matrix* mat = MALLOC(1, Matrix);
         mat->row = row;
         mat->column = column;
         mat->data = MALLOC(mat_size, DATA_TYPE);
-
         if (mat == NULL || mat->data == NULL)
         {
             free(mat);
@@ -190,7 +186,7 @@ Matrix* subtractMatrix(const Matrix* A, const Matrix* B)
     return mat_sub;
 }
 
-Matrix* addscalar(const Matrix* A, const DATA_TYPE b)
+Matrix* addScalar(const Matrix* A, const DATA_TYPE b)
 {
     if (A == NULL)
     {
@@ -210,7 +206,7 @@ Matrix* addscalar(const Matrix* A, const DATA_TYPE b)
 
 }
 
-Matrix* subscalar(const Matrix* A, const DATA_TYPE b)
+Matrix* subScalar(const Matrix* A, const DATA_TYPE b)
 {
     if (A == NULL)
     {
@@ -218,11 +214,30 @@ Matrix* subscalar(const Matrix* A, const DATA_TYPE b)
         return NULL;
     }
 
-    Matrix* C = addscalar(A, -1 * b);
+    Matrix* C = addScalar(A, -1 * b);
 
     return C;
 
 }
+
+Matrix* multiplyScalar(const Matrix* A, const DATA_TYPE b)
+{
+    if (A == NULL)
+    {
+        ERROR_INPUT_POINTER;
+        return NULL;
+    }
+
+    Matrix* C = copyMatrix(A);
+    
+    INT  i;
+    for (i = 0; i < (A->column * A->row); i++)
+    {
+        C->data[i] = C->data[i] * b;
+    }
+    return C;
+}
+
 
 DATA_TYPE maxelem(const Matrix* A)
 {
@@ -274,25 +289,29 @@ Matrix* mulMatrix(const Matrix* A, const Matrix* B)
         return NULL;
     }
 
-    if (A->row != B->column)
+    if (A->column != B->row)
     {
         ERROR_SIZE_MATCH;
         return NULL;
     }
 
-    INT i, j, size;
+    INT i, j, k, size;
     size = A->row * B->column;
     DATA_TYPE c_data[size];
+    INT C_index = 0;
+    DATA_TYPE C_element = 0;
+
+    for(i=0; i<A->row;i++){
+        for(j=0;j<B->column;j++){
+            for(k=0; k<A->column; k++){
+                C_element += A->data[(i*A->column) + k] * B->data[(k*B->column) + j];
+            };
+            c_data[C_index] = C_element;
+            C_index += 1;
+            C_element = 0;
+        };
+    };
     
-    for(j = 0; j < A->row; j++)
-    {
-        for(i = 0; i < A->column; i++)
-        {
-            
-            c_data[j * A->row + i] += A->data[j * A->row + i] * B->data[i * A->row + j];
-            
-        }
-    }
     Matrix* C = createMatrix( A->row, B->column, size, c_data);
 
     return C;
