@@ -39,4 +39,8 @@ DATA_TYPE minelem(const Matrix* A);
 
 Matrix* mulMatrix(const Matrix* A, const Matrix* B);
 
+Matrix* transpMatrix(const Matrix* A);
+
+Matrix* identityMatrix(const INT side);
+
 #endif

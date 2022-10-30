@@ -77,9 +77,9 @@ VOID printMatrix(const Matrix* mat)
     }
 
     INT i, j;
-    for (i = 0; i < mat->column; i++) 
+    for (i = 0; i < mat->row; i++) 
     {
-        for (j = 0; j < mat->row; j++)
+        for (j = 0; j < mat->column; j++)
         {
             printf(PRECISION, mat->data[i * (mat->column) + j]);
         }
@@ -244,7 +244,7 @@ DATA_TYPE maxelem(const Matrix* A)
     if (A == NULL)
     {
         ERROR_INPUT_POINTER;
-        return -1;
+        return NULL;
     }
 
     DATA_TYPE max = A->data[0];
@@ -265,7 +265,7 @@ DATA_TYPE minelem(const Matrix* A)
     if (A == NULL)
     {
         ERROR_INPUT_POINTER;
-        return -1;
+        return NULL;
     }
 
     DATA_TYPE min = A->data[0];
@@ -315,5 +315,54 @@ Matrix* mulMatrix(const Matrix* A, const Matrix* B)
     Matrix* C = createMatrix( A->row, B->column, size, c_data);
 
     return C;
+
+}
+
+// transposed matrix
+
+Matrix* transpMatrix(const Matrix* A)
+{
+    if (A == NULL)
+    {
+        ERROR_INPUT_POINTER;
+        return NULL;
+    }
+
+    INT i, j, size;
+    size = A->row * A->column;
+    DATA_TYPE B_data[size];
+    INT B_index = 0;
+    for(i=0; i<A->column; i++){
+        for(j=0; j<A->row; j++){
+            B_data[B_index] = A->data[j*A->column + i];
+            B_index += 1;
+        }
+    }
+    
+    Matrix* B = createMatrix( A->column, A->row, size, B_data);
+
+    return B;
+
+}
+
+// identity matrix
+Matrix* identityMatrix(const INT side)
+{
+    INT i, j;
+    INT size = side * side;
+    DATA_TYPE one = 1.0, zero=0.0;
+    DATA_TYPE data[size];
+
+    for (j = 0; j < size; j++)//c or cpp language
+	{
+		data[j] = zero;
+	}
+    for(i=0; i<side; i++){
+        data[i*side + i] = one;
+    };
+    
+    Matrix* mat = createMatrix(side, side, size, data);
+
+    return mat;
 
 }

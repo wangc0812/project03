@@ -6,12 +6,13 @@
 int main()
 {
     printf("test \n");
-    const int elenum = 4;
-    DATA_TYPE data[4] = {5,2,8,4};
+    const int elenum = 6;
+    DATA_TYPE data[6] = {5,2,8,4,2,5};
     const INT row = 2;
-    const INT col = 2;
+    const INT col = 3;
 
     // generate matrix
+    printf("**************************** \n");
     printf("create a Matrix \n");
     Matrix* mat1 = createMatrix(row, col, elenum, data);
 
@@ -19,40 +20,64 @@ int main()
     printMatrix(mat1);
 
     // copy matrix
+    printf("**************************** \n");
     printf("copy a Matrix \n");
     Matrix* mat2 = copyMatrix(mat1);
     printMatrix(mat2);  // to confirm the copy function
-    
+
+    printf("**************************** \n");
     printf("add two Matrices \n");
     Matrix* mat3 = addMatrix(mat1, mat2); // matrix add
     printMatrix(mat3);  // to confirm the add function
+    printf("**************************** \n");
     printf("subtrucy two Matrices \n");
     Matrix* mat4 = subtractMatrix(mat3, mat2); // matrix sub
     printMatrix(mat4);  // to confirm the sub function
 
     // matrix add scalar
+    printf("**************************** \n");
     printf("matrix add scalar(6.6) \n");
     DATA_TYPE b = 6.6;
     Matrix* mat5 = addScalar(mat1, b);
     printMatrix(mat5);  // to confirm the add scalar function
 
+    printf("**************************** \n");
     printf("matrix subtract scalar(6.6) \n");
     Matrix* mat6 = subScalar(mat1, b);
     printMatrix(mat6);  // to confirm the add scalar function
 
+    printf("**************************** \n");
     printf("matrix mutiple scalar(2.0) \n");
     DATA_TYPE c = 2.0;
     Matrix* mat7 = multiplyScalar(mat1, c);
     printMatrix(mat7);  // to confirm the add scalar function
 
+    printf("**************************** \n");
     printf("find the minimal and maximal values of a matrix \n");
     DATA_TYPE  max = maxelem(mat1);
     DATA_TYPE  min = minelem(mat1);
     printf("max value = %f, min value = %f\n", max , min );
 
-    printf("multiply two matrices. \n");
-    Matrix* C = mulMatrix(mat1, mat2);
-    printMatrix(C);
+    printf("**************************** \n");
+    printf("multiply two matrices with unmatched size. \n");
+    Matrix* mat8 = mulMatrix(mat1, mat2);
+    printMatrix(mat8);
+
+    printf("**************************** \n");
+    printf("transpose matrices. \n");
+    Matrix* mat9 = transpMatrix(mat1);
+    printMatrix(mat9);
+
+    printf("**************************** \n");
+    printf("multiply two matrices after transpose a Matrix. \n");
+    Matrix* mat10 = mulMatrix(mat1, mat9);
+    printMatrix(mat10);
+
+    printf("**************************** \n");
+    printf("create an identity Matrix. \n");
+    INT side = 8;
+    Matrix* mat11 = identityMatrix(side);
+    printMatrix(mat11);
 
 
     // free memory
@@ -63,7 +88,10 @@ int main()
     deleteMatrix(mat5);
     deleteMatrix(mat6);
     deleteMatrix(mat7);
-    deleteMatrix(C);
+    deleteMatrix(mat8);
+    deleteMatrix(mat9);
+    deleteMatrix(mat10);
+    deleteMatrix(mat11);
     
     return 0;
 }
