@@ -22,7 +22,7 @@ CFLAG = -g # gdb debuger
 $(TARGET) : $(OBJS)
 	$(CC) $(CFLAG) -o $@ $(OBJS) 
 
-%.o : %.c # all the .o objects depend on the .cpp files
+%.o : %.c # all the .o objects depend on the .c files
 	$(CC) $(CFLAGES) $< -o $@ $(INCLUDE)
 
 
