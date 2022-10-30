@@ -301,16 +301,19 @@ Matrix* mulMatrix(const Matrix* A, const Matrix* B)
     INT C_index = 0;
     DATA_TYPE C_element = 0;
 
-    for(i=0; i<A->row;i++){
-        for(j=0;j<B->column;j++){
-            for(k=0; k<A->column; k++){
-                C_element += A->data[(i*A->column) + k] * B->data[(k*B->column) + j];
-            };
+    for(i=0; i < A->row; i++)
+    {
+        for(j=0; j < B->column; j++)
+        {
+            for(k=0; k <A->column; k++)
+            {
+                C_element += A->data[(i * A->column) + k] * B->data[(k * B->column) + j];
+            }
             c_data[C_index] = C_element;
             C_index += 1;
             C_element = 0;
-        };
-    };
+        }
+    }
     
     Matrix* C = createMatrix( A->row, B->column, size, c_data);
 
